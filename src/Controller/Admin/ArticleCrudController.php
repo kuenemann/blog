@@ -4,11 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use App\Entity\Comment;
+
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -22,11 +25,12 @@ class ArticleCrudController extends AbstractCrudController
         yield TextField::new('title');
         yield SlugField::new('slug')->setTargetFieldName('title');
         yield TextEditorField::new('content');
-        yield DateTimeField::new('createdAt')->hideOnForm();
-        yield DateTimeField::new('updatedAt')->hideOnForm();
-        yield AssociationField::new('image');
-        yield TextField::new('featured_text');
-        yield AssociationField::new('category');
+        yield DateTimeField::new('createdAt')->setLabel('Créé le')->hideOnForm();
+        yield DateTimeField::new('updatedAt')->setLabel('Mis à jour le')->hideOnForm();
+        yield AssociationField::new('image')->setLabel('Image');
+        yield TextField::new('featured_text')->setLabel('Texte en vedette');
+        yield AssociationField::new('category')->setLabel('Catégorie');
     }
-
+    
 }
+

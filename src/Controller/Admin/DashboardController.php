@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Comment;
+use App\Entity\Menu;
+
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -38,11 +41,21 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToRoute('Aller sur le site', 'fa fa-undo','app_accueil');
+
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class)
+        ]);
+        yield MenuItem::subMenu('Menus','fas fa-list')->setSubItems([
+            MenuItem::linkToCrud('', 'fas fa-newspaper', Article::class),
+            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
+            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
+            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
+
         ]);// yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
+
 }

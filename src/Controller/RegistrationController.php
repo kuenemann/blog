@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\UserAuthenticator;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,12 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-    private UserAuthenticator $userAuthenticator;
-
-    public function __construct(UserAuthenticator $userAuthenticator)
-    {
-        $this->userAuthenticator = $userAuthenticator;
-    }
+    // ...
 
     #[Route('/register', name: 'app_register')]
     public function register(
@@ -45,8 +39,7 @@ class RegistrationController extends AbstractController
             );
 
             // Définissez la date de création
-/*             $user->setCreatedAt(new DateTimeImmutable());
- */            $user->setUpdatedAt(new DateTimeImmutable());
+            $user->setUpdatedAt(new DateTimeImmutable());
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -60,5 +53,4 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    // Autres méthodes ou fonctionnalités peuvent être ajoutées ici
 }

@@ -1,16 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{article.title}}
+    {{ article.title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>{{article.title}}</h1>
+    <div class="container">
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.createdAt|date('d F Y', 'Europe/Paris') }}</p>
+        <hr>
+        {{ article.content|raw }}
 
-		<hr>
+        <div class="comment-section">
+            <h2>Commentaires</h2>
+            {% if article.getComment() is not empty %}
+                <ul class="list-group">
+                    {% for comment in article.getComment() %}
+                        <li class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <span class="comment-date">{{ comment.getCreatedAt()|date('d F Y', 'Europe/Paris') }}</span>
+                            </div>
+                            <p class="mb-1">{{ comment.getContent() }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun commentaire pour le moment.</p>
+            {% endif %}
+        </div>
 
-			{{article.content|raw}}
-
+  {# Ajoutez ici le formulaire pour ajouter un commentaire #}
+<div class="comment-form">
+    {{ form_start(commentForm, {'attr': {'class': 'form'}}) }}
+    
+    {{ form_row(commentForm.content, {'attr': {'class': 'form-control mb-2'}, 'label': 'Contenu du commentaire'}) }}
+    
+    <button type="submit" class="btn btn-primary">Ajouter un commentaire</button>
+    
+    {{ form_end(commentForm) }}
+</div>
 
 {% endblock %}

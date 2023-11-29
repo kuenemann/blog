@@ -9,9 +9,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article implements TimestampedInterface
 {
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,7 +36,9 @@ class Article implements TimestampedInterface
     #[ORM\Column(length: 255)]
     private ?string $featured_text = null;
 
-    
+
+
+
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTime $created_at = null;
@@ -48,14 +54,13 @@ class Article implements TimestampedInterface
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class)]
     private Collection $image;
 
-/*     #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?Category $Category = null; */
-
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Category $category = null;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    private Collection $Comment;
 
-    
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
@@ -63,8 +68,11 @@ class Article implements TimestampedInterface
         $this->updated_at = new \DateTime();
         $this->featured_image_id = 0;
         $this->is_active = true;
+        $this->Comment = new ArrayCollection();
     }
 
+
+    
 
     public function getId(): ?int
     {
@@ -149,10 +157,14 @@ class Article implements TimestampedInterface
         return $this;
     }
 
+
+
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
+
+
 
 
 
@@ -215,6 +227,36 @@ class Article implements TimestampedInterface
     public function setCategory(?Category $Category): static
     {
         $this->category = $Category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComment(): Collection
+    {
+        return $this->Comment;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->Comment->contains($comment)) {
+            $this->Comment->add($comment);
+            $comment->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->Comment->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
+            }
+        }
 
         return $this;
     }
