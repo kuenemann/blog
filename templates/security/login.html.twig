@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+			background-color: #CF9F22;
+		}
+
+		.custom-form {
+			background-color: white;
+			padding: 20px;
+			border: 2px solid #007BFF;
+			border-radius: 10px;
+		}
+
+		.custom-logo {
+			max-width: 120px;
+			height: auto;
+		}
+	</style>
+	<div class="container">
+		<div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+			<div class="col-md-8 col-lg-6">
+				<div class="card custom-form">
+					<div class="card-body">
+						<div class="wrapper text-center">
+							<div class="logo">
+								<img src="https://cdn1.iconfinder.com/data/icons/logos-and-brands-3/512/84_Dev_logo_logos-512.png" alt="" class="custom-logo">
+							</div>
+							<div class="text-center mt-4 name">
+								<h1>Progressive Code</h1>
+							</div>
+							<form class="p-4 mt-4" method="post">
+								{% if error %}
+									<div class="alert alert-danger" role="alert">
+										{{ error.messageKey|trans(error.messageData, 'security') }}
+									</div>
+								{% endif %}
+
+								<div class="form-field d-flex align-items-center mb-3">
+									<span class="far fa-user"></span>
+									<input type="text" value="{{ last_username }}" name="email" id="userName" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
+								</div>
+								<div class="form-field d-flex align-items-center mb-3">
+									<span class="fas fa-key"></span>
+									<input type="password" name="password" id="pwd" class="form-control" placeholder="Mot de passe" required>
+								</div>
+
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								<button class="btn btn-primary btn-block mt-4">Se connecter</button>
+							</form>
+							<div class="text-center fs-6 mt-2">
+						
+								<a href="{{path('app_register')}}">S'inscrire</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
