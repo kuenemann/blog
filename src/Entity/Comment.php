@@ -26,6 +26,8 @@ class Comment
     #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', nullable: false)]
     private ?Article $article = null;
 
+    
+
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
     private ?User $user = null;  // Remplace UserInterface par User
@@ -48,7 +50,6 @@ class Comment
     }
 
     
-
     public function getArticleId(): ?int
     {
         return $this->article_id;
@@ -61,11 +62,28 @@ class Comment
         return $this;
     }
 
+    public function getUserLastName(): ?string
+    {
+        return $this->user ? $this->user->getLastName() : null;
+    }
+    
+    public function getUserFirstName(): ?string
+    {
+        return $this->user ? $this->user->getFirstName() : null;
+    }
+    
+    public function getUserEmail(): ?string
+    {
+        return $this->user ? $this->user->getEmail() : null;
+    }
+    
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+
+    
     public function setContent(string $content): static
     {
         $this->content = $content;

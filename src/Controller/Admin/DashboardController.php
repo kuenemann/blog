@@ -19,10 +19,11 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private AdminUrlGenerator $adminUrlGenerator
-    ) 
+    )
     {
+        
     }
-
+    
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
@@ -39,6 +40,7 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Blog');
     }
 
+    
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Aller sur le site', 'fa fa-undo','app_accueil');
