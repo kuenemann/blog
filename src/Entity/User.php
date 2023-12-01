@@ -10,6 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
+
+
+/**
+ * @Vich\UploadableField(mapping="profile_pictures", fileNameProperty="profilePicture")
+ */
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -26,9 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
@@ -50,13 +55,59 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $bio = null;
 
+    #[ORM\Column(length: 100, unique: true, nullable: true)]
+    private ?string $username = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private Collection $comments;
 
+    #[ORM\Column(nullable: true)]
+
+  
+ /*   private ?File $profilePictureFile = null;
+
+
+    private ?string $profilePicture = null;
+
+    public function setProfilePicture(?string $profilePicture): void
+    {
+        $this->profilePicture = $profilePicture;
+    }
+
+    public function getProfilePictureFile(): ?File
+{
+    return $this->profilePictureFile;
+}
+
+public function setProfilePictureFile(?File $profilePictureFile): void
+{
+    $this->profilePictureFile = $profilePictureFile;
+}
+
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    } */
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        /* $this->profilePicture = 'default.jpg';  */
+    }
+
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -76,23 +127,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
+
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -105,9 +148,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
+
     public function getPassword(): string
     {
         return $this->password;
@@ -120,13 +161,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
+
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
@@ -146,7 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->last_name;
     }
 
-    
+
     public function setLastName(string $last_name): static
     {
         $this->last_name = $last_name;
@@ -182,7 +219,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->gdpr;
     }
-    
+
 
     public function setGdpr(?\DateTimeInterface $gdpr): static
     {

@@ -41,10 +41,22 @@ body {
   }
   
 
-
   .form-control {
     resize: none;
 }
 
 
 
+.btn btn-primary{
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+// Personnaliser les couleurs des boutons
+.btn-primary,
+.btn-warning,
+.btn-info {
+  background-color: #17a2b8; // Bleu-gris
+  border-color: #17a2b8; // Bordure bleu-gris
+  color: #fff; // Couleur du texte
+}
