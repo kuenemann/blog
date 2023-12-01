@@ -6,12 +6,24 @@ body {
 }
 
 
+/* styles.css */
+
+body {
+  background-color: #CF9F22;
+}
+
+.menu-burger {
+  background-color: #808080;
+  color: white;
+  border: none;
+}
+
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff; /* Couleur principale de Bootstrap */
     color: #fff;
     text-align: center;
     text-decoration: none;
@@ -28,3 +40,11 @@ body {
     }
   }
   
+
+
+  .form-control {
+    resize: none;
+}
+
+
+

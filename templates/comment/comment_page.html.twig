@@ -22,37 +22,7 @@
 
  
 
-{# <script>
-async function deleteComment(commentId) {
-    const isConfirmed = confirm("Voulez-vous vraiment supprimer ce commentaire ?");
 
-    if (isConfirmed) {
-        try {
-            const response = await fetch(`/comment/delete/${commentId}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                console.log("Commentaire supprimé avec succès.");
-
-                // Retirez l'élément du DOM représentant le commentaire supprimé
-                const commentElement = document.getElementById(`comment-${commentId}`);
-                if (commentElement) {
-                    console.log("Avant la suppression de l'élément DOM");
-                    commentElement.remove();
-                } else {
-                    console.error("Élément du commentaire non trouvé dans le DOM.");
-                }
-            } else {
-                console.error("Erreur lors de la suppression du commentaire :", response.statusText);
-            }
-        } catch (error) {
-            console.error("Erreur générale :", error);
-        }
-    }
-}
-
-</script> #}
 
 
 

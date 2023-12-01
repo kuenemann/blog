@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+   <div class="container mt-5">
+      <h1 class="text-center mb-4">Profil de {{ user.first_Name }} {{ user.last_Name }}</h1>
+
+      <div class="row justify-content-center">
+         <div class="col-md-4 mb-4 text-center">
+            <img src="{{ path('app_user_profile_picture') }}" alt="Photo de profil" class="img-fluid rounded mb-3">
+            <button class="btn btn-primary">Changer la photo</button>
+         </div>
+         <div class="col-md-8">
+            <p class="lead">Email : {{ user.email }}</p>
+            <p>Dernière mise à jour : {{ user.updatedAt ? user.updatedAt.format('Y-m-d H:i:s') : 'N/A' }}</p>
+            <p>Est vérifié : {{ user.isVerified ? 'Oui' : 'Non' }}</p>
+            <p>Date GDPR : {{ user.gdpr ? user.gdpr.format('Y-m-d H:i:s') : 'N/A' }}</p>
+         </div>
+      </div>
+
+      <div class="mt-4">
+         <h2>Votre Bio</h2>
+         <p>{{ user.bio ? user.bio : 'Ajoutez une bio pour vous présenter.' }}</p>
+         <button class="btn btn-primary" data-toggle="modal" data-target="#bioModal">Modifier la bio</button>
+      </div>
+
+      <!-- Modal pour modifier la bio -->
+      <div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-labelledby="bioModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="bioModalLabel">Modifier votre bio</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <!-- Ajoutez ici un formulaire pour modifier la bio -->
+                  <form>
+                     <div class="form-group">
+                        <label for="bioTextarea">Votre Bio</label>
+                        <textarea class="form-control" id="bioTextarea" rows="3">{{ user.bio ? user.bio : '' }}</textarea>
+                     </div>
+                     <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Ajouter un nom d'utilisateur -->
+      <div class="mt-4">
+         <h2>Nom d'utilisateur</h2>
+         <p>{{ user.username ? user.username : 'Ajoutez un nom d\'utilisateur.' }}</p>
+         <button class="btn btn-primary" data-toggle="modal" data-target="#usernameModal">Modifier le nom d'utilisateur</button>
+      </div>
+
+      <!-- Modal pour modifier le nom d'utilisateur -->
+      <div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="usernameModalLabel">Modifier le nom d'utilisateur</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <!-- Ajoutez ici un formulaire pour modifier le nom d'utilisateur -->
+                  <form>
+                     <div class="form-group">
+                        <label for="usernameInput">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="usernameInput
