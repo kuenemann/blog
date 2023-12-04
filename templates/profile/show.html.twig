@@ -3,84 +3,46 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-   <div class="container mt-5">
-      <div class="card p-4">
-         <div class="row">
-            <div class="col-md-8">
-               <h1 class="mb-4">Profil de {{ user.getFirstName() }} {{ user.getLastName() }}</h1>
+    <div class="container mt-5">
+        <div class="card p-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="mb-4">Profil de {{ user.getFirstName() }} {{ user.getLastName() }}</h1>
 
-               <div class="mb-4">
-                  <strong>Email :</strong> {{ user.getEmail() }}<br>
-                  <strong>Est vérifié :</strong> {{ user.isIsVerified() ? 'Oui' : 'Non' }}<br>
-                  <strong>Date GDPR :</strong> {{ user.getGdpr() ? user.getGdpr().format('Y-m-d H:i:s') : 'N/A' }}
-               </div>
-
-               <div class="mt-4">
-                  <h2>Nom d'utilisateur</h2>
-                  <p>{{ user.getUsername() ? user.getUsername() : 'Ajoutez un nom d\'utilisateur.' }}</p>
-                  <button class="btn btn-primary" data-toggle="modal" data-target="#usernameModal">Modifier le nom d'utilisateur</button>
-               </div>
-
-               <!-- Modal pour modifier le nom d'utilisateur -->
-               <div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="usernameModalLabel">Modifier le nom d'utilisateur</h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                              <span aria-hidden="true">&times;</span>
-                           </button>
+                    <div class="profile-info">
+                        <div class="mb-3">
+                            <strong>Nom d'utilisateur :</strong> {{ user.getUsername() }}
                         </div>
-                        <div class="modal-body">
-                           <!-- Ajoutez ici un formulaire pour modifier le nom d'utilisateur -->
-                           <form>
-                              <div class="form-group">
-                                 <label for="usernameInput">Nom d'utilisateur</label>
-                                 <input type="text" class="form-control" id="usernameInput" value="{{ user.getUsername() ? user.getUsername() : '' }}">
-                              </div>
-                              <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                           </form>
+
+                        <div class="mb-3">
+                            <strong>Email :</strong> {{ user.getEmail() }}
                         </div>
-                     </div>
-                  </div>
-               </div>
+
+                        {% if user.getBio() is not null %}
+                            <div class="mb-3">
+                                <strong>Biographie :</strong> {{ user.getBio() }}
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <strong>Date GDPR :</strong>
+                            {% if user.getGdpr() or user.getUpdatedAt() %}
+                                {{ user.getGdpr() ? user.getGdpr()|date('Y-m-d H:i:s') : user.getUpdatedAt()|date('Y-m-d H:i:s') }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </div>
+
+                       {#  <div class="mb-3">
+                            <strong>Vérifié :</strong> {{ user.isIsVerified() ? 'Oui' : 'Non' }}
+                        </div> #}
+
+                        <div class="mt-4">
+                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier le Profil</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-           {#  <div class="col-md-4 text-right">
-               <img src="{{ asset('uploads/profile_pictures/' ~ user.getProfilePicture()) }}" alt="Photo de profil" class="img-fluid rounded mb-3">
-               <input type="file" class="sr-only" id="profilePictureInput" accept="image/*">
-
-               <div class="mt-4">
-                  <h2>Votre Bio</h2>
-                  <p>{{ user.getBio() ? user.getBio() : 'Ajoutez une bio pour vous présenter.' }}</p>
-                  <button class="btn btn-primary" data-toggle="modal" data-target="#bioModal">Modifier la bio</button>
-               </div> #}
-
-               <!-- Modal pour modifier la bio -->
-               <div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-labelledby="bioModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="bioModalLabel">Modifier votre bio</h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                              <span aria-hidden="true">&times;</span>
-                           </button>
-                        </div>
-                        <div class="modal-body">
-                           <!-- Ajoutez ici un formulaire pour modifier la bio -->
-                           <form>
-                              <div class="form-group">
-                                 <label for="bioTextarea">Votre Bio</label>
-                                 <textarea class="form-control" id="bioTextarea" rows="3">{{ user.getBio() ? user.getBio() : '' }}</textarea>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                           </form>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 {% endblock %}

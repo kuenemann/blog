@@ -21,6 +21,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/show.html.twig', [
             'user' => $user,
+            
         ]);
     }
 
@@ -79,6 +80,7 @@ class ProfileController extends AbstractController
 
         if (!$user) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
+            
         }
 
         $form = $this->createForm(ProfileType::class, $user);
@@ -94,6 +96,10 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/edit_profile.html.twig', [
             'form' => $form->createView(),
+            'user' => $user, // Ajoutez cette ligne pour transmettre la variable user au modèle
         ]);
     }
 }
+
+
+    

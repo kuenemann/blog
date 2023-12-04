@@ -18,9 +18,9 @@ class CommentType extends AbstractType
                 'label' => 'Contenu du commentaire',
                 'attr' => ['rows' => 5],
             ])
-            ->add('username', TextType::class, [ // Ajouter ce bloc pour le champ du nom d'utilisateur
+           /*  ->add('username', TextType::class, [ // Ajouter ce bloc pour le champ du nom d'utilisateur
                 'label' => 'Nom d\'utilisateur',
-            ]);
+            ]) */;
     }
 
     public function configureOptions(OptionsResolver $resolver)

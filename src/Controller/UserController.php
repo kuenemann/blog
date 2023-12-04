@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 class UserController extends AbstractController
 {
@@ -21,27 +21,37 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/{id}/edit', name: 'user_edit')]
-    public function edit(Request $request, User $user): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+   public function edit(Request $request, User $user): Response
+{   
+    $form = $this->createForm(UserType::class, $user);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Supprimez cette ligne, car le champ profilePicture a été retiré
-            // $profilePictureFile = $form->get('profilePicture')->getData();
+    // Ajoutez ces déclarations de dump pour déboguer
+    dump($user->getGdpr()); // Avant la soumission du formulaire
 
-            // Supprimez également toute la logique relative à profilePicture
-
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
+    if ($form->isSubmitted() && $form->isValid()) {
+        if ($user->getGdpr() === null) {
+            $user->setGdpr(new \DateTime());
         }
 
-        return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        // Ajoutez ces déclarations de dump pour déboguer
+        dump($user->getGdpr()); // Après la soumission du formulaire
+
+        $this->entityManager->flush();
+
+        // Ajoutez ces déclarations de dump pour déboguer
+        dump($user->getGdpr()); // Après la mise à jour dans la base de données
+
+        return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
 
-    // Ajoutez d'autres méthodes au besoin
+    return $this->render('user/edit.html.twig', [
+        'user' => $user,
+        'form' => $form->createView(),
+    ]);
+    }
+
 }
+
+
+

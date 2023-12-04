@@ -10,14 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File;
 
 
 
-/**
- * @Vich\UploadableField(mapping="profile_pictures", fileNameProperty="profilePicture")
- */
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -61,40 +58,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private Collection $comments;
 
+
     #[ORM\Column(nullable: true)]
 
-  
- /*   private ?File $profilePictureFile = null;
-
-
-    private ?string $profilePicture = null;
-
-    public function setProfilePicture(?string $profilePicture): void
-    {
-        $this->profilePicture = $profilePicture;
-    }
-
-    public function getProfilePictureFile(): ?File
-{
-    return $this->profilePictureFile;
-}
-
-public function setProfilePictureFile(?File $profilePictureFile): void
-{
-    $this->profilePictureFile = $profilePictureFile;
-}
-
-
-    public function getProfilePicture(): ?string
-    {
-        return $this->profilePicture;
-    } */
 
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        /* $this->profilePicture = 'default.jpg';  */
+        $this->gdpr = new \DateTime();
     }
 
 

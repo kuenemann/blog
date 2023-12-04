@@ -36,9 +36,14 @@ class Article implements TimestampedInterface
     #[ORM\Column(length: 255)]
     private ?string $featured_text = null;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, cascade: ['remove'])]
+private Collection $comments;
 
 
 
+/* #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+private Collection $comments;
+ */
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTime $created_at = null;
@@ -60,6 +65,7 @@ class Article implements TimestampedInterface
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
     private Collection $Comment;
 
+   
 
     public function __construct()
     {

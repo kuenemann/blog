@@ -22,11 +22,19 @@ class Comment
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', nullable: false)]
-    private ?Article $article = null;
+/*     #[ORM\ManyToOne(inversedBy: 'comments')]
+ */    /* #[ORM\JoinColumn(name: 'article_id', referencedColumnName: 'id', nullable: false)]
+    private ?Article $article = null; */
 
-    
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+private ?Article $article = null;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
@@ -49,7 +57,10 @@ class Comment
         return $this;
     }
 
-    
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
     public function getArticleId(): ?int
     {
         return $this->article_id;
@@ -66,24 +77,24 @@ class Comment
     {
         return $this->user ? $this->user->getLastName() : null;
     }
-    
+
     public function getUserFirstName(): ?string
     {
         return $this->user ? $this->user->getFirstName() : null;
     }
-    
+
     public function getUserEmail(): ?string
     {
         return $this->user ? $this->user->getEmail() : null;
     }
-    
+
     public function getContent(): ?string
     {
         return $this->content;
     }
 
 
-    
+
     public function setContent(string $content): static
     {
         $this->content = $content;

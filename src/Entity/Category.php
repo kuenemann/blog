@@ -24,12 +24,13 @@ class Category
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $color = null;
 
-/*     #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Article::class)]
+
+    /* #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Article::class)]
     private Collection $articles; */
 
-    #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Article::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Article::class, cascade: ['remove'])]
     private Collection $articles;
-
+    
 
     public function __construct()
     {

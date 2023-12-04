@@ -56,7 +56,17 @@ body {
 .btn-primary,
 .btn-warning,
 .btn-info {
-  background-color: #17a2b8; // Bleu-gris
-  border-color: #17a2b8; // Bordure bleu-gris
-  color: #fff; // Couleur du texte
+  background-color: #17a2b8; 
+  border-color: #17a2b8; 
+  color: #fff; 
 }
+
+
+/* Retire le trait sous le liens Progressive Coode page D'accueil */
+.titre a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+

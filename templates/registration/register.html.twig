@@ -22,11 +22,14 @@
 	</style>
 
 	<div class="container">
-		<div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-			<div class="col-md-6">
-				<div class="card custom-form">
-					<div class="card-body">
-						<h1 class="text-center">Inscription</h1>
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6">
+            <div class="card custom-form">
+                <div class="card-body text-center"> <!-- Ajout de la classe text-center -->
+                    <div class="logo d-flex justify-content-center mb-4"> <!-- Ajout des classes d-flex et justify-content-center, mb-4 pour une marge en bas -->
+                        <img src="https://cdn1.iconfinder.com/data/icons/logos-and-brands-3/512/84_Dev_logo_logos-512.png" alt="" class="custom-logo">
+                    </div>
+                    <h1 class="text-center">Inscription</h1>
 
 						{{ form_start(registrationForm, {'attr': {'class': 'needs-validation'}}) }}
 
