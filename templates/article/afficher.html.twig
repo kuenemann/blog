@@ -1,116 +1,132 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ article.title }}
+	{{ article.title }}
 {% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 {% endblock %}
 
 {% block body %}
 
-<style>
-    body {
-        background-color: #CF9F22;
-    }
+	<style>
 
-    .custom-form {
-        background-color: white;
-        padding: 20px;
-        border: 2px solid #007BFF;
-        border-radius: 10px;
-    }
+		body {
+			background-color: #CF9F22;
+		}
 
-    .custom-button {
-        background-color: #808080; /* Gris mat */
-        color: white; /* Couleur du texte */
-        border: none; 
-    }
-</style>
+		.custom-form {
+			background-color: white;
+			padding: 20px;
+			border: 2px solid #007BFF;
+			border-radius: 10px;
+		}
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-body">
-            <h1 class="card-title">{{ article.title }}</h1>
-            <p class="card-text">{{ article.createdAt|date('d F Y', 'Europe/Paris') }}</p>
-            <hr>
-            {{ article.content|raw }}
-        </div>
+		.custom-button {
+			background-color: #808080; /* Gris mat */
+			color: white; /* Couleur du texte */
+			border: none;
+		}
+	</style>
+
+
+				
+
+	<div class="container mt-4">
+		<div class="card">
+			<div class="card-body">
+				<h1 class="card-title">{{ article.title }}</h1>
+				<p class="card-text">{{ article.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+				</p>
+
+				{% if article.category is not null %}
+					<p class="card-text">Catégorie:
+						{{ article.category.name ?? 'Aucune catégorie' }}</p>
+
+				{% else %}
+					<p class="card-text">Catégorie: Aucune catégorie</p>
+				{% endif %}				
+				<hr>
+				{{ article.content|raw }}				
+			</div>
+		</div>
+
+		<div class="mt-4">
+
+		
+			<h2>Commentaires</h2>
+			{% if article.getComment() is not empty %}
+				<ul class="list-group">
+					{% for comment in article.getComment() %}
+						<li id="comment-{{ comment.id }}" class="list-group-item">
+							<div class="d-flex w-100 justify-content-between">
+								<span class="comment-date">{{ comment.getCreatedAt()|date('d F Y', 'Europe/Paris') }}</span>
+								{% if comment.getUser() is not null %}
+									<span class="comment-last-name">{{ comment.getUser().getLastName() }}</span>
+									{% if app.user is not null and comment.getUser() == app.user %}
+										<div class="btn-group" role="group">
+											<button class="btn btn-sm btn-danger custom-button" onclick="deleteComment({{ comment.id }})">Supprimer</button>
+										</div>
+									{% endif %}
+								{% else %}
+									<span class="comment-last-name">Utilisateur supprimé</span>
+								{% endif %}
+							</div>
+							<p class="mb-1">{{ comment.getContent() }}</p>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>Aucun commentaire pour le moment.</p>
+			{% endif %}
+		</div>
+
+		{# Ajoutez ici le formulaire pour ajouter un commentaire #}
+
+	<div class="mt-4 mb-4">
+    {{ form_start(commentForm, {'attr': {'class': 'form'}}) }}
+
+    <div class="comment-section">
+        <h2>{{ form_label(commentForm.content, 'Contenu du commentaire') }}</h2>
+
+        {{ form_widget(commentForm.content, {'attr': {'class': 'form-control mb-2'}}) }}
+
+        <button type="submit" class="btn btn-primary custom-button">Ajouter un commentaire</button>
     </div>
 
-    <div class="mt-4">
-        <h2>Commentaires</h2>
-        {% if article.getComment() is not empty %}
-            <ul class="list-group">
-                {% for comment in article.getComment() %}
-                    <li id="comment-{{ comment.id }}" class="list-group-item">
-                        <div class="d-flex w-100 justify-content-between">
-                            <span class="comment-date">{{ comment.getCreatedAt()|date('d F Y', 'Europe/Paris') }}</span>
-                            {% if comment.getUser() is not null %}
-                                <span class="comment-last-name">{{ comment.getUser().getLastName() }}</span>
-                                {% if app.user is not null and comment.getUser() == app.user %}
-                                    <div class="btn-group" role="group">
-                                        <button class="btn btn-sm btn-danger custom-button" onclick="deleteComment({{ comment.id }})">Supprimer</button>
-                                    </div>
-                                {% endif %}
-                            {% else %}
-                                <span class="comment-last-name">Utilisateur supprimé</span>
-                            {% endif %}
-                        </div>
-                        <p class="mb-1">{{ comment.getContent() }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Aucun commentaire pour le moment.</p>
-        {% endif %}
-    </div>
-
-    {# Ajoutez ici le formulaire pour ajouter un commentaire #}
-   
-    <div class="mt-4">
-        {{ form_start(commentForm, {'attr': {'class': 'form'}}) }}
-        
-        <div class="comment-section">
-            <h2>{{ form_label(commentForm.content, 'Contenu du commentaire') }}</h2>
-        
-            {{ form_widget(commentForm.content, {'attr': {'class': 'form-control mb-2'}}) }}
-        
-            <button type="submit" class="btn btn-primary custom-button">Ajouter un commentaire</button>
-        </div>
-        
-        {{ form_end(commentForm) }}
-    </div>
-    
+    {{ form_end(commentForm) }}
 </div>
 
-<script>
-    async function deleteComment(commentId) {
-        if (confirm("Voulez-vous vraiment supprimer ce commentaire ?")) {
-            try {
-                const response = await fetch(`/comment/delete/${commentId}`, {
-                    method: 'DELETE',
-                });
+	<script>
+	        /* Script JavaScript pour cette page spécifique */
 
-                if (response.ok) {
-                    const commentElement = document.getElementById(`comment-${commentId}`);
-                    if (commentElement) {
-                        commentElement.remove();
-                        console.log("Commentaire supprimé avec succès");
-                    } else {
-                        console.error("Élément du commentaire non trouvé dans le DOM.");
-                    }
-                } else {
-                    const data = await response.json();
-                    console.error(data.message);
-                }
-            } catch (error) {
-                console.error("Erreur lors de la suppression du commentaire :", error);
-            }
-        }
-    }
-</script>
+		async function deleteComment(commentId) {
 
+			if (confirm("Voulez-vous vraiment supprimer ce commentaire ?")) {
+		try {
+
+		const response = await fetch (`/comment/delete/${commentId}`, {method: 'DELETE'});
+
+		if (response.ok) {
+
+		const commentElement = document.getElementById (`comment-${commentId}`);
+		if (commentElement){
+
+		commentElement.remove();
+		("Commentaire supprimé avec succès");}
+		 
+		 else {
+
+		console.error("Élément du commentaire non trouvé dans le DOM.");}} 
+		else {
+
+		const data = await response.json();
+
+		console.error(data.message);}}catch (error) {
+
+		console.error("Erreur lors de la suppression du commentaire :", error);}}}
+
+	</script>
 {% endblock %}

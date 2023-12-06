@@ -4,8 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
-use App\Entity\Comment;
-use App\Entity\Menu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

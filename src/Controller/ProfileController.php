@@ -38,7 +38,6 @@ class ProfileController extends AbstractController
             $newUsername = $request->request->get('username');
 
             // Validez et mettez à jour le nom d'utilisateur
-            // ...
 
             $this->addFlash('success', 'Nom d\'utilisateur mis à jour avec succès!');
             return $this->redirectToRoute('app_profile');
@@ -87,7 +86,6 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Gérez la mise à jour du profil, y compris la photo de profil si nécessaire
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Profil mis à jour avec succès!');
@@ -96,7 +94,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/edit_profile.html.twig', [
             'form' => $form->createView(),
-            'user' => $user, // Ajoutez cette ligne pour transmettre la variable user au modèle
+            'user' => $user, 
         ]);
     }
 }

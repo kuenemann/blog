@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,10 +12,10 @@ class CategoryController extends AbstractController
 {
     #[Route('/category/{mode}', name: 'category_mode')]
     #[Route('/category/{slug}/{mode}', name: 'category_mode_with_slug')]
-    public function show(string $mode, string $slug = 'default'): Response
+    public function show(string $mode, EntityManagerInterface $entityManagerInterface, string $slug = 'default'): Response
     {
         $template = $this->getTemplate($mode);
-
+    
         return $this->render($template, [
             'categorySlug' => $slug,
         ]);

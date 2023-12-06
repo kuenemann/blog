@@ -37,11 +37,11 @@ class Article implements TimestampedInterface
     private ?string $featured_text = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, cascade: ['remove'])]
-private Collection $comments;
+    private Collection $comments;
 
 
 
-/* #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    /* #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
 private Collection $comments;
  */
 
@@ -65,7 +65,7 @@ private Collection $comments;
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
     private Collection $Comment;
 
-   
+
 
     public function __construct()
     {
@@ -78,7 +78,7 @@ private Collection $comments;
     }
 
 
-    
+
 
     public function getId(): ?int
     {
@@ -225,18 +225,37 @@ private Collection $comments;
         return $this;
     }
 
+
+    
+
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $Category): static
+
+    public function setCategory(?Category $category): static
     {
-        $this->category = $Category;
+        if ($category !== null) {
+            $this->category = $category;
+            $category->addArticle($this); 
+        }
 
         return $this;
     }
 
+    public function getCategoryImage(): ?string
+    {
+        // Vérifiez si l'article a une catégorie associée
+        if ($this->getCategory() !== null) {
+            // Renvoie l'image de la catégorie
+            return $this->getCategory()->getImage();
+        }
+
+        return null;
+    }
+
+  
     /**
      * @return Collection<int, Comment>
      */

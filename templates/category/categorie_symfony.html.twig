@@ -1,34 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="text-center">Symfony</h1>
-        
-        <div class="p-4 mb-3 bg-light rounded">
-            <h4 class="fst-italic">Explorez le Monde Fascinant de Symfony</h4>
-            <p>
-                Symfony est un framework PHP moderne et robuste utilisé pour le développement d'applications web. Il simplifie le processus de création, de maintenance et de mise à l'échelle de projets web complexes en fournissant une architecture solide et des composants réutilisables.
-            </p>
-            <p>
-                Lorsque vous travaillez avec Symfony, vous bénéficiez d'une structure organisée, de la gestion des dépendances, de l'ORM (Object-Relational Mapping) avec Doctrine, et de nombreux autres outils qui accélèrent le développement web.
-            </p>
-            <h5 class="fw-bold">Que Peut Faire Symfony ?</h5>
-            <p>
-                Symfony offre une multitude de fonctionnalités, y compris la gestion des routes, la manipulation des formulaires, la sécurité, la gestion des sessions, et bien plus encore. Il suit le paradigme MVC (Modèle-Vue-Contrôleur) pour séparer la logique métier de la présentation, ce qui facilite la maintenance et l'extension du code.
-            </p>
-            <h5 class="fw-bold">Ressources pour Apprendre Symfony :</h5>
-            <ul>
-                <li>
-                    <a class="text-decoration-none" href="https://symfony.com/doc/current/index.html" target="_blank">Documentation Symfony</a> - La documentation officielle de Symfony pour apprendre les concepts, les composants et les bonnes pratiques.
-                </li>
-                <li>
-                    <a class="text-decoration-none" href="https://symfonycasts.com/" target="_blank">SymfonyCasts</a> - Des tutoriels vidéo pour apprendre Symfony et ses composants de manière interactive.
-                </li>
-                <li>
-                    <a class="text-decoration-none" href="https://knpuniversity.com/screencast/symfony" target="_blank">KnpUniversity</a> - Des screencasts pour approfondir vos compétences Symfony.
-                </li>
-            </ul>
-           
-        </div>
-    </div>
+	<div class="container mt-5">
+		<h1 class="text-center">Symfony</h1>
+
+		<div class="p-4 mb-3 bg-light rounded">
+		
+			<h4 class="fst-italic">Explorez le Monde Fascinant de Symfony</h4>
+			<p>
+				Symfony est un framework PHP moderne et robuste utilisé pour le développement d'applications web. Il simplifie le processus de création, de maintenance et de mise à l'échelle de projets web complexes en fournissant une architecture solide et des composants réutilisables.
+			</p>
+			<p>
+				Lorsque vous travaillez avec Symfony, vous bénéficiez d'une structure organisée, de la gestion des dépendances, de l'ORM (Object-Relational Mapping) avec Doctrine, et de nombreux autres outils qui accélèrent le développement web.
+			</p>
+			<h5 class="fw-bold">Que Peut Faire Symfony ?</h5>
+			<p>
+				Symfony offre une multitude de fonctionnalités, y compris la gestion des routes, la manipulation des formulaires, la sécurité, la gestion des sessions, et bien plus encore. Il suit le paradigme MVC (Modèle-Vue-Contrôleur) pour séparer la logique métier de la présentation, ce qui facilite la maintenance et l'extension du code.
+			</p>
+			<h5 class="fw-bold">Ressources pour Apprendre Symfony :</h5>
+			<ul>
+				<li>
+					<a class="text-decoration-none" href="https://symfony.com/doc/current/index.html" target="_blank">Documentation Symfony</a>
+					- La documentation officielle de Symfony pour apprendre les concepts, les composants et les bonnes pratiques.
+				</li>
+				<li>
+					<a class="text-decoration-none" href="https://symfonycasts.com/" target="_blank">SymfonyCasts</a>
+					- Des tutoriels vidéo pour apprendre Symfony et ses composants de manière interactive.
+				</li>
+				<li>
+					<a class="text-decoration-none" href="https://knpuniversity.com/screencast/symfony" target="_blank">KnpUniversity</a>
+					- Des screencasts pour approfondir vos compétences Symfony.
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	<a href="{{ path('app_all_article', {'slug': 'symfony'}) }}" class="btn btn-primary">Voir tous les articles de la catégorie</a>
 {% endblock %}

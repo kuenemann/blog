@@ -2,10 +2,13 @@
 
 <div class="container">
     <div class="row justify-content-center">
+    
         <div class="col-md-8">
             <article class="mb-5">
                 <div class="row">
                     <div class="col-md-5">
+                    	    <img src='/images/{{article.category.image}}' alt="Image de larticle">
+
                         {% if article.image|length > 0 %}
                             {# Access the first image associated with the article #}
                             <a href="{{ article_show }}">
@@ -18,7 +21,7 @@
                             <a class="text-decoration-none" href="{{ article_show }}">{{ article.title }}</a>
                         </h2>
                         <p>
-                            {{ article.createdAt|date('D M Y') }}
+                           {{ article.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
                         </p>
                         {{ article.featuredText ?: article.content|striptags|slice(0, 130) ~ '...' }}
                     </div>
