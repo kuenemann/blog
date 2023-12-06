@@ -49,6 +49,18 @@ function deleteComment(commentId) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    var links = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.host + '"])');
+  
+    links.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.open(link.href, '_blank');
+      });
+    });
+  });
+  
+
 
 
 

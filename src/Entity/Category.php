@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,13 +23,8 @@ class Category
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $color = null;
 
-
-    /* #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Article::class)]
-    private Collection $articles; */
-
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Article::class, cascade: ['remove'])]
     private Collection $articles;
-    
 
     public function __construct()
     {

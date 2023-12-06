@@ -50,13 +50,13 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class)
         ]);
-        yield MenuItem::subMenu('Menus','fas fa-list')->setSubItems([
+        /* yield MenuItem::subMenu('Menus','fas fa-list')->setSubItems([
             MenuItem::linkToCrud('', 'fas fa-newspaper', Article::class),
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
 
-        ]);// yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        ]); */// yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
 }

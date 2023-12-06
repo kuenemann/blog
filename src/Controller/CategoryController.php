@@ -2,18 +2,34 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category/{slug}', name: 'category_show')]
-    public function show(Category $category): Response
+    #[Route('/category/{mode}', name: 'category_mode')]
+    #[Route('/category/{slug}/{mode}', name: 'category_mode_with_slug')]
+    public function show(string $mode, string $slug = 'default'): Response
     {
-        return $this->render('category/show.html.twig', [
-            'category' => $category,
+        $template = $this->getTemplate($mode);
+
+        return $this->render($template, [
+            'categorySlug' => $slug,
         ]);
+    }
+
+    private function getTemplate(string $mode): string
+    {
+        switch ($mode) {
+            case 'html':
+                return 'category/categorie_html.html.twig';
+            case 'css':
+                return 'category/categorie_css.html.twig';
+            case 'symfony':
+                return 'category/categorie_symfony.html.twig';
+            default:
+                throw $this->createNotFoundException('Template not found');
+        }
     }
 }
