@@ -23,11 +23,6 @@ const enableDropdown = () => {
     });
 };
 
-let menu  = document.querySelector(".personal-menu")
-
-
-
-
 
 
 function deleteComment(commentId) {

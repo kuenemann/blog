@@ -52,7 +52,7 @@ border-top-left-radius: 20px;
   width: 100%;
 }
 .container{
-  width: 42%;
+  width: 35%;
 }
 
 
@@ -105,19 +105,19 @@ a {
   background-color: black;
   color: white;
   border-radius: 9px;
-
 }
+
+.nav-categories{
+  width:100%;
+}
+
+
 .list-unstyled {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-
-.nav-categories{
-  width:100%;
 }
 
 .fst-italic{
