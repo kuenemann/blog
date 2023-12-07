@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Blog - {% block title %}{% endblock %}</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -14,18 +14,16 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 
-    <style>
-        .custom-footer-bg {
-            background-color: #808080;
-            color: #ffffff; /* Text color in the footer */
-        }
-    </style>
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-<nav class="py-2 border-bottom menu-burger">
-    <div class="container d-flex flex-wrap">
+<nav class="py-2 border-bottom menu-burger main-header">
+   <h1 class="titre">
+                <a class="fs-4" href="{{ path('app_accueil') }}">Progressive Code</a>
+            </h1>
+    <div class="personal-menu dropdown-toggle">
         <div class="dropdown ">
             <a class="nav nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Mon Blog
@@ -52,33 +50,32 @@
                 </li>
             </ul>
         </div>
-    </div>
-</nav>
-
-<div class="container flex-grow-1">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <div class="d-flex align-content-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <h1 class="titre">
-                <a class="fs-4 text-dark" href="{{ path('app_accueil') }}">Progressive Code</a>
-            </h1>
-        </div>
-        <ul class="nav nav-pills">
+          <ul class="nav nav-pills">
             {% if app.user %}
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ path('user_edit', {'id': app.user.id}) }}">Profil</a>
+                    <a class="nav-link " href="{{ path('user_edit', {'id': app.user.id}) }}">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ path('app_logout')}}">Se Déconnecter</a>
+                    <a class="nav-link " href="{{ path('app_logout')}}">Se Déconnecter</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{path('app_register')}}">S'inscrire</a>
+                    <a class="nav-link " href="{{path('app_register')}}">S'inscrire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ path('app_login')}}">Se Connecter</a>
+                    <a class="nav-link " href="{{ path('app_login')}}">Se Connecter</a>
                 </li>
             {% endif %}
         </ul>
+    </div>
+</nav>
+
+<div class="flex-grow-1">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom header">
+        <div class="d-flex align-content-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+         
+        </div>
+      
     </header>
 
     {% block body %}{% endblock %}

@@ -11,29 +11,6 @@
 
 {% block body %}
 
-	<style>
-
-		body {
-			background-color: #CF9F22;
-		}
-
-		.custom-form {
-			background-color: white;
-			padding: 20px;
-			border: 2px solid #007BFF;
-			border-radius: 10px;
-		}
-
-		.custom-button {
-			background-color: #808080; /* Gris mat */
-			color: white; /* Couleur du texte */
-			border: none;
-		}
-	</style>
-
-
-				
-
 	<div class="container mt-4">
 		<div class="card">
 			<div class="card-body">
@@ -89,7 +66,7 @@
     {{ form_start(commentForm, {'attr': {'class': 'form'}}) }}
 
     <div class="comment-section">
-        <h2>{{ form_label(commentForm.content, 'Contenu du commentaire') }}</h2>
+        <h2 class="article-title">{{ form_label(commentForm.content, 'Contenu du commentaire') }}</h2>
 
         {{ form_widget(commentForm.content, {'attr': {'class': 'form-control mb-2'}}) }}
 

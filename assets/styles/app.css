@@ -1,0 +1,22 @@
+@media screen and (min-width: 700px) {
+    .container{
+      width: 29%;
+      margin:20px;
+    }
+    .nav-categories{
+      margin: left 10%;
+    }
+    .list-unstyled {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .img-category {
+      width: 100%;
+      height: 25vh;
+      object-fit: cover;
+      border-top-right-radius: 20px ;
+      border-top-left-radius: 20px;
+      }
+
+  }

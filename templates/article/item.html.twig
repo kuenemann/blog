@@ -2,31 +2,34 @@
 
 <div class="container">
     <div class="row justify-content-center">
-    
-        <div class="col-md-8">
+    <a class="text-decoration-none" href="{{ article_show }}">
+        <div>
             <article class="mb-5">
-                <div class="row">
-                    <div class="col-md-5">
-                    	    <img src='/images/{{article.category.image}}' alt="Image de larticle">
-
-                        {% if article.image|length > 0 %}
-                            {# Access the first image associated with the article #}
-                            <a href="{{ article_show }}">
-                                <img src="/uploads/{{ article.image.first.filename }}" alt="{{ article.image.first.altText }}" loading="lazy" width="350" height="205">
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-7">
-                        <h2>
-                            <a class="text-decoration-none" href="{{ article_show }}">{{ article.title }}</a>
+                <div class="card">
+                    <!-- Div pour l'image ajustée à gauche -->
+                        <img src='/images/{{article.category.image}}' alt="Image de l'article" class="img-category">
+                    
+                    <!-- Div pour le reste du contenu de l'article -->
+                    <div class="article-datas">
+                        <h2 class="article-title">
+                            {{ article.title }}
                         </h2>
-                        <p>
-                           {{ article.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
-                        </p>
+
+                        <div class="article-metadata"> 
+                          <p class="article-category">
                         {{ article.featuredText ?: article.content|striptags|slice(0, 130) ~ '...' }}
+                        </p>
+                        <p class="article-date">
+                           {{ article.createdAt|format_datetime(locale='fr', pattern="dd MM YYYY") }}
+                                                      {# {{ article.createdAt}} #}
+
+                        </p>
+                      
+                     
                     </div>
                 </div>
             </article>
         </div>
+        </a>
     </div>
 </div>
