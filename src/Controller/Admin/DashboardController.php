@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\User; 
+
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -46,15 +48,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class)
-        ]);
-        /* yield MenuItem::subMenu('Menus','fas fa-list')->setSubItems([
-            MenuItem::linkToCrud('', 'fas fa-newspaper', Article::class),
-            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
-            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
-            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
+            MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class),
+            MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class), 
 
-        ]); */// yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        ]);
+       
     }
 
 }
+
+

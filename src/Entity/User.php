@@ -58,17 +58,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private Collection $comments;
 
+    #[ORM\Column]
+    private ?bool $is_blocked = null;
 
-    #[ORM\Column(nullable: true)]
 
-
-
-    public function __construct()
+    public function getIsBlocked(): ?bool
     {
-        $this->comments = new ArrayCollection();
-        $this->gdpr = new \DateTime();
+        return $this->is_blocked;
     }
 
+    public function setIsBlocked(bool $is_blocked): static
+    {
+        $this->is_blocked = $is_blocked;
+
+        return $this;
+    }
 
     public function getUsername(): ?string
     {
@@ -175,6 +179,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->gdpr = new \DateTime();
+        $this->is_verified = true;
+    }
     public function isIsVerified(): ?bool
     {
         return $this->is_verified;

@@ -28,6 +28,7 @@ class ArticleCrudController extends AbstractCrudController
         yield AssociationField::new('image')->setLabel('Image');
         yield TextField::new('featured_text')->setLabel('Texte en vedette');
         yield AssociationField::new('category')->setLabel('Catégorie');
+        
     }
     
 }
