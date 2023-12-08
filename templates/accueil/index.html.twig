@@ -4,21 +4,21 @@
 
 {% block body %}
 
-	<main >
-		<div>
-			<div class="content">
-				<h3 class="pb-4 mb-4 fst-italic border-bottom">Articles récents</h3>
-				<div id="article-list">
-{% include "article/list.html.twig" with { 'articles': articles } %}
-				</div>
-			</div>
-			<div class="col-md-4 nav-categories">
-				<div class="position-sticky" style="top:1rm" ;>
-					{% include "widget/about.html.twig" %}
+    <main>
+        <div>
+            <div class="container-list">
+                <h3 class="pb-4 mb-4 fst-italic border-bottom">Articles récents</h3>
+                <div id="article-list">
+                    {% include "article/list.html.twig" with { 'articles': articles } %}
+                </div>
+            </div>
+            <div class="col-md-4 nav-categories">
+                <div class="position-sticky" style="top:1rm;">
+                    {% include "widget/about.html.twig" %}
                     {% include "widget/categorie.html.twig" %}
-				</div>
-			</div>
-		</div>
-	</main>
+                </div>
+            </div>
+        </div>
+    </main>
 
 {% endblock %}

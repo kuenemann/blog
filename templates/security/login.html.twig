@@ -3,10 +3,10 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="container-login mt-5"> {# Ajout de mt-5 pour une marge en haut #}
+        <div class="row justify-content-center align-items-center" style="min-height: 80vh;"> {# Ajustement de la hauteur du conteneur #}
             <div class="col-sm-12 col-md-8 col-lg-6">
-                <div class="card custom-form">
+                <div class="card custom-form mx-auto">
                     <div class="card-body">
                         <div class="wrapper text-center">
                             <div class="logo">
@@ -32,7 +32,7 @@
                                 </div>
 
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                <button class="btn btn-primary btn-block mt-4">Se connecter</button>
+                                <button class="btn-connecter mt-4">Se connecter</button>
                             </form>
                             <div class="text-center fs-6 mt-2">
                                 <a href="{{ path('app_register') }}">S'inscrire</a>

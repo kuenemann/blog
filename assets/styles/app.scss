@@ -1,67 +1,117 @@
-
 @import "~bootstrap/scss/bootstrap";
 @import url("./app.css");
+
 body {
-    background-color: f5f5f5;
+  background-color: f5f5f5;
 }
 
 
 /* couleur Menu-Burger */
-.py-2{
-    background-color: #000;
-    color: white;
-    border: none;
+.py-2 {
+  background-color: #000;
+  color: white;
+  border: none;
 }
 
 /* couleur Progressive code */
-a.fs-4{
-  color:#72A98F;
+a.fs-4 {
+  color: #72A98F;
   text-decoration: none;
 
+}
+
+a:hover{
+  text-decoration: none;
+  
+}
+
+.img-fluid {
+  max-width: 50%;
+}
+
+.btn-connecter{ 
+/*     width: 31%;
+ */    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    color: #fff;
+    background-color: #0d6efd; /* Couleur de fond bleue */
+    border: 1px solid #0d6efd; /* Bordure bleue */
+    padding: 10px; /* Ajoutez du rembourrage pour un aspect visuel agréable */
+    cursor: pointer; /* Changez le curseur au survol du bouton */
+    display: block; /* Permet de centrer avec margin: auto; */
+    text-align: center; /* Centre le texte à l'intérieur du bouton */
+    text-decoration: none; /* Supprime la décoration de texte par défaut */
+    border-radius: 10px;
+}
+
+.button-style:hover {
+    background-color: #007bff; /* Couleur de fond bleue foncée au survol */
+    border-color: #007bff; /* Bordure bleue foncée au survol */
+}
+
+
+
+.btn-primary {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 }
 
 /* Article Recents */
 .fst-italic {
-  color:#cf9f22;
- }
+  color: #cf9f22;
+}
 
 /* titre des Article */
-.text-decoration-none{
-  color:white;
+.text-decoration-none {
+  color: white;
   font-size: 1.5rem;
+  max-width: 350px;
+  color: #63937c;
 }
 
 /* Categories */
-.text-decoration{
-  color:#f5f5f5;
+.text-decoration {
+  color: #f5f5f5;
   font-size: 1.5rem;
   text-decoration: none;
 }
+
 /* img-des Artcile */
 .img-category {
-width: 100%;
-height: 15vh;
-object-fit: cover;
-border-top-right-radius: 20px ;
-border-top-left-radius: 20px;
+  width: 100%;
+  height: 15vh;
+  object-fit: cover;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
-#article-list{
+
+#article-list {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
   width: 100%;
 }
-.container{
+
+.container {
   width: 35%;
+  @media screen and (max-width: 700px) {
+  width: auto;
+  }
 }
 
+/* .container-login{
+  width: 70%;
+} */
 
-.card{
+
+.card {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-border: 5px solid #000;
+  border: 5px solid #000;
   border-radius: 25px;
 
 }
@@ -69,46 +119,54 @@ border: 5px solid #000;
 a {
   text-decoration: none;
 }
-.article-title{
+
+.article-title {
   text-align: center;
   text-decoration: underline;
   font-size: 16px;
   margin-top: 16px;
 }
-.article-metadata{
+
+.article-metadata {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  margin:0 10%
+  margin: 0 10%
 }
-.article-date{
+
+.article-date {
   font-size: 9px;
-  color:gray
+  color: gray
 }
-.article-datas{
+
+.article-datas {
   width: 90%;
   margin: 0 10%
 }
-.article-category{
+
+.article-category {
   font-size: 12px;
-  color:darkgray;
+  color: darkgray;
 
 }
-.header,.content{
-  width:90%;
-  margin:0 5%
+
+.header,
+.content {
+  width: 90%;
+  margin: 0 5%
 }
 
-.nav-categories{
-  border:2px solid #cf9f22;
+.nav-categories {
+  border: 2px solid #cf9f22;
   background-color: black;
   color: white;
   border-radius: 9px;
 }
 
-.nav-categories{
-  width:100%;
+.nav-categories {
+  width: 100%;
+  bottom: 0;
 }
 
 
@@ -120,28 +178,51 @@ a {
   text-align: center;
 }
 
-.fst-italic{
+/* titre Article Récent + positionnement */
+.fst-italic {
   text-align: center;
+  margin: 10px;
+
 }
 
-.text-decoration{
-  margin:10px;
+.text-decoration {
+  margin: 10px;
 }
 
-.main-header{
+.main-header {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding-left: 10%
+ }
+@media only screen and (max-width: 280px) {
+  .main-header {
+    flex-direction: column;
+    align-items: center;
+/*     padding-left: 5px;
+ */  }
+
 }
-.personal-menu{
+  
+.personal-menu {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-right: 30px;
 
 }
+@media only screen and (max-width: 280px) {
+
 .nav-link {
-  color:#fff
+  display:flex;
+  color: #fff
+}
+}
+.btn-primary{
+/*   width: 26%;
+ */    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 }

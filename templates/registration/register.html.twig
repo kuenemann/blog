@@ -3,10 +3,10 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-            <div class="col-sm-12 col-md-6">
-                <div class="card custom-form">
+    <div class="container-login mt-5">
+        <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+            <div class="col-sm-12 col-md-8 col-lg-6"> {# Ajustement de la classe col-lg-6 #}
+                <div class="card custom-form mx-auto">
                     <div class="card-body text-center">
                         <div class="logo d-flex justify-content-center mb-4">
                             <img src="https://cdn1.iconfinder.com/data/icons/logos-and-brands-3/512/84_Dev_logo_logos-512.png" alt="" class="custom-logo img-fluid">
@@ -18,28 +18,28 @@
                         <div class="form-group">
                             {{ form_row(registrationForm.last_name, {
                                 label: 'Nom',
-                                'attr': {'class': 'form-control', 'required': true}
+                                'attr': {'class': 'form-control form-control-lg', 'required': true}
                             }) }}
                         </div>
 
                         <div class="form-group">
                             {{ form_row(registrationForm.first_name, {
                                 label: 'Prénom',
-                                'attr': {'class': 'form-control', 'required': true}
+                                'attr': {'class': 'form-control form-control-lg', 'required': true}
                             }) }}
                         </div>
 
                         <div class="form-group">
                             {{ form_row(registrationForm.email, {
                                 label: 'Adresse Email',
-                                'attr': {'class': 'form-control', 'required': true}
+                                'attr': {'class': 'form-control form-control-lg', 'required': true}
                             }) }}
                         </div>
 
                         <div class="form-group">
                             {{ form_row(registrationForm.plainPassword, {
                                 label: 'Mot de passe',
-                                'attr': {'class': 'form-control', 'required': true}
+                                'attr': {'class': 'form-control form-control-lg', 'required': true}
                             }) }}
                         </div>
 
