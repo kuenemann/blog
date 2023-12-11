@@ -3,8 +3,8 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <div class="container-login mt-5"> {# Ajout de mt-5 pour une marge en haut #}
-        <div class="row justify-content-center align-items-center" style="min-height: 80vh;"> {# Ajustement de la hauteur du conteneur #}
+    <div class="container-login mt-5"> 
+        <div class="row justify-content-center align-items-center" style="min-height: 80vh;"> 
             <div class="col-sm-12 col-md-8 col-lg-6">
                 <div class="card custom-form mx-auto">
                     <div class="card-body">
@@ -15,6 +15,7 @@
                             <div class="text-center mt-4 name">
                                 <h1>Progressive Code</h1>
                             </div>
+                            
                             <form class="p-4 mt-4" method="post">
                                 {% if error %}
                                     <div class="alert alert-danger" role="alert">
@@ -37,6 +38,7 @@
                             <div class="text-center fs-6 mt-2">
                                 <a href="{{ path('app_register') }}">S'inscrire</a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

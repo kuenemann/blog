@@ -12,8 +12,17 @@ class AccueilController extends AbstractController
     #[Route('/', name: 'app_accueil')]
     public function index(ArticleRepository $articleRepo): Response
     {
-        return $this->render('accueil/index.html.twig', [
-            'articles' => $articleRepo->findAll()
-        ]);
+        // Vérifie si l'utilisateur est connecté et actif
+        if ($this->getUser() && $this->getUser()->getIsActive()) {
+            // Récupère les articles
+            $articles = $articleRepo->findAll();
+
+            return $this->render('accueil/index.html.twig', [
+                'articles' => $articles
+            ]);
+        } else {
+            // Redirige vers la page de connexion si l'utilisateur n'est pas actif
+            return $this->redirectToRoute('app_login');
+        }
     }
 }

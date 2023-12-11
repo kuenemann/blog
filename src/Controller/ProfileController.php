@@ -37,6 +37,9 @@ class ProfileController extends AbstractController
         if ($request->isMethod('POST')) {
             $newUsername = $request->request->get('username');
 
+
+            
+
             // Validez et mettez à jour le nom d'utilisateur
 
             $this->addFlash('success', 'Nom d\'utilisateur mis à jour avec succès!');

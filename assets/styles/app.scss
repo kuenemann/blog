@@ -7,11 +7,18 @@ body {
 
 
 /* couleur Menu-Burger */
-.py-2 {
-  background-color: #000;
-  color: white;
-  border: none;
-}
+@media only screen and (min-width: 279px) {
+
+
+    .py-2 {
+      background-color: #000;
+      color: white;
+      border: none;
+      
+    }
+    
+  }
+
 
 /* couleur Progressive code */
 a.fs-4 {
@@ -35,19 +42,19 @@ a:hover{
     margin-right: auto;
     margin-bottom: 10px;
     color: #fff;
-    background-color: #0d6efd; /* Couleur de fond bleue */
-    border: 1px solid #0d6efd; /* Bordure bleue */
-    padding: 10px; /* Ajoutez du rembourrage pour un aspect visuel agréable */
-    cursor: pointer; /* Changez le curseur au survol du bouton */
-    display: block; /* Permet de centrer avec margin: auto; */
-    text-align: center; /* Centre le texte à l'intérieur du bouton */
-    text-decoration: none; /* Supprime la décoration de texte par défaut */
+    background-color: #0d6efd; 
+    border: 1px solid #0d6efd; 
+    padding: 10px; 
+    cursor: pointer; 
+    display: block; 
+    text-align: center; 
+    text-decoration: none; 
     border-radius: 10px;
 }
 
 .button-style:hover {
-    background-color: #007bff; /* Couleur de fond bleue foncée au survol */
-    border-color: #007bff; /* Bordure bleue foncée au survol */
+    background-color: #007bff;
+    border-color: #007bff; 
 }
 
 
@@ -95,7 +102,7 @@ a:hover{
 }
 
 .container {
-  width: 35%;
+  width: 50%;
   @media screen and (max-width: 700px) {
   width: auto;
   }
@@ -113,7 +120,6 @@ a:hover{
   align-items: center;
   border: 5px solid #000;
   border-radius: 25px;
-
 }
 
 a {
@@ -226,3 +232,8 @@ a {
     margin-right: auto;
     margin-bottom: 10px;
 }
+
+
+
+
+

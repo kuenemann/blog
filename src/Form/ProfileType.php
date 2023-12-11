@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,10 +22,13 @@ class ProfileType extends AbstractType
                 'label' => 'Votre Bio',
                 'required' => true,  
             ])
-            // Si le champ n'est pas obligatoire
+
+            ->add('is_active', CheckboxType::class, [
+                'label' => 'Activer le compte',
+                'required' => false, 
+            ]);
             ;
 
-        // Ajoutez d'autres champs en fonction de vos besoins
     }
 
     public function configureOptions(OptionsResolver $resolver)

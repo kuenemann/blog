@@ -15,6 +15,8 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use App\Entity\User;
 
 class UserAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -22,8 +24,11 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    private UrlGeneratorInterface $urlGenerator;
+
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function authenticate(Request $request): Passport
@@ -44,7 +49,14 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // TODO: Provide a valid redirect
+        $user = $token->getUser();
+
+        if ($user instanceof User && !$user->getIsActive()) {
+            // Compte bloqué, lance une exception
+            throw new CustomUserMessageAuthenticationException('Votre compte est bloqué');
+        }
+
+        // Si le compte n'est pas bloqué, redirige vers la page d'accueil
         return new RedirectResponse($this->urlGenerator->generate('app_accueil'));
     }
 

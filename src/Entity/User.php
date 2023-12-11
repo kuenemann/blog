@@ -12,12 +12,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
-
-
-
-
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cet e-mail')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -59,9 +55,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[ORM\Column]
-    private ?bool $is_blocked = null;
+    private ?bool $is_blocked = false;
 
+    #[ORM\Column]
+    private ?bool $is_active = true;
 
+    public function getIsActive(): ?bool
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(bool $is_active): static
+    {
+        $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    
     public function getIsBlocked(): ?bool
     {
         return $this->is_blocked;
@@ -73,6 +84,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isBlocked(): ?bool
+    {
+        return $this->is_blocked;
+    }
+
 
     public function getUsername(): ?string
     {
